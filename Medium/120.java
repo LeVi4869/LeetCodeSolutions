@@ -1,18 +1,15 @@
+import java.util.*;
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
-        for (int row = 1; row < triangle.size(); row++) {
-            for (int col = 0; col <= row; col++) {
-                int smallestAbove = Integer.MAX_VALUE;
-                if (col > 0) {
-                    smallestAbove = triangle.get(row - 1).get(col - 1);
-                }
-                if (col < row) {
-                    smallestAbove = Math.min(smallestAbove, triangle.get(row - 1).get(col));
-                }
-                int path = smallestAbove + triangle.get(row).get(col);
-                triangle.get(row).set(col, path);
+        int dp[] = new int[triangle.get(triangle.size() - 1).size()];
+        for(int i = 0; i < triangle.get(triangle.size() - 1).size(); ++i) {
+            dp[i] = triangle.get(triangle.size() - 1).get(i);
+        }
+        for(int i = triangle.size() - 2; i >= 0; --i) {
+            for(int j = 0; j < triangle.get(i).size(); ++j) {
+                dp[j] = Math.min(dp[j], dp[j + 1]) + triangle.get(i).get(j);
             }
         }
-        return Collections.min(triangle.get(triangle.size() - 1));
+        return dp[0];
     }
 }
