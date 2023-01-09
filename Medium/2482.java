@@ -12,8 +12,8 @@ class Solution {
                 }
             }
         }
-        for(int j = 0; i < grid[0].length; ++i){
-            for(int i = 0; j < grid.length; ++j){
+        for(int j = 0; j < grid[0].length; ++j){
+            for(int i = 0; i < grid.length; ++i){
                 if(grid[i][j] == 1){
                     col[j]++;
                 }
